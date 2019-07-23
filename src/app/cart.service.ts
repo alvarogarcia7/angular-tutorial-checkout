@@ -22,6 +22,13 @@ export class CartService {
   clearCart(): void {
     this.items.length = 0
   }
+  
+  remove(product: Product): void {
+    var index = this.items.indexOf(product);
+    if (index > -1) {
+      this.items.splice(index, 1);
+    }
+  }
 
 
 }
