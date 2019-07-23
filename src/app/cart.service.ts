@@ -13,12 +13,12 @@ export class CartService {
 
   items : Array<Product> = []
   @Output() notify = new EventEmitter()
-  @Output() subtotal: Subtotal
 
   constructor(private http: HttpClient) { }
 
   addToCart(product: Product): void {
     this.items.push(product)
+    this.calculateSubtotal()
     console.log(this.items)
   }
 
@@ -34,6 +34,7 @@ export class CartService {
     var index = this.items.indexOf(product);
     if (index > -1) {
       this.items.splice(index, 1);
+      this.calculateSubtotal()
     }
   }
 
@@ -41,10 +42,22 @@ export class CartService {
     return this.http.get('/assets/shipping.json');
   }
 
+  calculateSubtotal(): Subtotal {
+    const total = this.items.reduce((acc, ele) => acc + ele.price, 0),
+    const base = total / 1.21;
+    const tax = total - base;
+    return new Subtotal (base, tax, total);
+  }
 }
 
-export class Subtotal{
+export class Subtotal {
   base: number
   tax: number
   total: number
+
+  constructor(base, tax, total){
+    this.base = base;
+    this.tax = tax;
+    this.total = total;
+  }
 }

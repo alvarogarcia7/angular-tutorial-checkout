@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { products } from '../products';
 
+import { CartService } from '../cart.service'
+
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -10,10 +12,19 @@ import { products } from '../products';
 export class ProductListComponent {
   products = products;
 
+  constructor(
+    private cartService: CartService
+  ) { 
+  }
+
   share(event, product) {
     console.log(event)
     console.log(product)
     console.log('This product has been shared: ' + product.name + '!');
+  }
+
+  addToCart(event, product) {
+    this.cartService.addToCart(product)
   }
 
   onNotify(){

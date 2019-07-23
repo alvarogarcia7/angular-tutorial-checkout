@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CartService } from '../cart.service';
+import { CartService, Subtotal } from '../cart.service';
 import { Product } from '../products';
 
 @Component({
@@ -11,7 +11,7 @@ import { Product } from '../products';
 export class CartComponent implements OnInit {
 
   items : Array<Product>;
-
+  
   constructor(
     private cartService: CartService
   ) {
@@ -24,6 +24,10 @@ export class CartComponent implements OnInit {
 
   remove(product){
     this.cartService.remove(product);
+  }
+
+  getSubtotal(): Subtotal{
+    return this.cartService.calculateSubtotal()
   }
 
 }

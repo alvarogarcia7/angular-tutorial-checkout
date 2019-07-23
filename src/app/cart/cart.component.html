@@ -9,3 +9,14 @@
 <h3>Shipping</h3>
 
 <a [routerLink]="['/shipping']">Shipping info</a>
+
+<div *ngIf="items.length > 0">
+  <h3> Total </h3>
+  <div class="totals">
+    <ul>
+      <li>Base: {{ getSubtotal().base | currency }}</li>
+      <li>Tax: {{ getSubtotal().tax | currency }}</li>
+      <li>Total: {{ getSubtotal().total | currency }}</li>
+    </ul>
+  </div>
+</div>
