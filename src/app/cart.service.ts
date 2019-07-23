@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Product} from './products';
+import { HttpClient} from '@angular/common/http'; 
+
+import { Input, Output } from '@angular/core';
+import {EventEmitter} from '@angular/core';
+
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +12,10 @@ import {Product} from './products';
 export class CartService {
 
   items : Array<Product> = []
+  @Output() notify = new EventEmitter()
+  @Output() subtotal: Subtotal
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   addToCart(product: Product): void {
     this.items.push(product)
@@ -30,5 +37,14 @@ export class CartService {
     }
   }
 
+  getShippingPrices() {
+    return this.http.get('/assets/shipping.json');
+  }
 
+}
+
+export class Subtotal{
+  base: number
+  tax: number
+  total: number
 }
