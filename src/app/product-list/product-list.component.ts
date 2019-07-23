@@ -10,8 +10,10 @@ import { products } from '../products';
 export class ProductListComponent {
   products = products;
 
-  share() {
-    window.alert('The product has been shared!');
+  share(event, product) {
+    console.log(event)
+    console.log(product)
+    window.alert('This product has been shared: ' + product.name + '!');
   }
 }
 
