@@ -15,6 +15,10 @@ export class ProductListComponent {
     console.log(product)
     window.alert('This product has been shared: ' + product.name + '!');
   }
+
+  onNotify(){
+    window.alert('You will be notified');
+  }
 }
 
 

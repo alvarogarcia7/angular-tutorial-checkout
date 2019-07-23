@@ -4,7 +4,9 @@
   <h3> {{ product.name }} </h3>
   <p *ngIf="product.description"> {{ product.description }}</p>
   <button (click)="share(null,product)">Share</button>
-  <app-product-alerts [product]="product"></app-product-alerts>
+  <app-product-alerts 
+    [product]="product"
+    (notify)="onNotify()"></app-product-alerts>
 </div>
 
 <!-- 
